@@ -44,7 +44,7 @@ public class HibernateConfig {
       props.put(HBM2DDL_AUTO, env.getProperty("hibernate.hbm2ddl.auto"));
 
       // Setting C3P0 properties
-      props.put(C3P0_MIN_SIZE, 
+      /*props.put(C3P0_MIN_SIZE, 
             env.getProperty("hibernate.c3p0.min_size"));
       props.put(C3P0_MAX_SIZE, 
             env.getProperty("hibernate.c3p0.max_size"));
@@ -54,7 +54,7 @@ public class HibernateConfig {
             env.getProperty("hibernate.c3p0.timeout"));
       props.put(C3P0_MAX_STATEMENTS, 
             env.getProperty("hibernate.c3p0.max_statements"));
-
+*/
       factoryBean.setHibernateProperties(props);
       factoryBean.setAnnotatedClasses(User.class);
       return factoryBean;
