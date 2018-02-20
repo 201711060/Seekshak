@@ -1,0 +1,6 @@
+com\sbts\controller\RESTWebService.class
+com\sbts\config\MyWebAppInitializer.class
+com\sbts\config\WebConfig.class
+com\sbts\service\UserService.class
+com\sbts\config\HibernateConfig.class
+com\sbts\entity\User.class
