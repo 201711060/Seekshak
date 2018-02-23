@@ -11,9 +11,6 @@ import com.sbts.entity.User;
 
 @RestController
 public class RESTWebService {
-
-	   //@Autowired
-	   //private UserService userService;
 	   
 	   @GetMapping("/users")
 	   public ResponseEntity<List<User>> list() {
