@@ -44,10 +44,10 @@
 						<div class="panel-title">
 							<h3 style="padding: 1%; width:600px; float:left"><c:out value="${job.jobtitle}" /> - 
 							<c:out value="${job.postedby}" /></h3>
-							<div style="float: right; margin: 5% width:100px">
+							<div style="float: right; margin: 1%; width:100px">
 								<input type="Submit" class="link-style" value="Apply"/>
 							</div>
-							<p style="float: right; margin: 4% width:100px">
+							<p style="float: right; margin: 1%; width:100px">
 								LastDate:
 								<c:out value="${job.lastdate}" />
 								<br>
