@@ -279,4 +279,9 @@ public class ClientController {
 		return "index";
 	}
 
+	@GetMapping("/")
+	public String getHome(Model model) {
+		return "index";
+	}
+	
 }
