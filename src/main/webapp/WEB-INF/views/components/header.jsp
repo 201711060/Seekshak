@@ -4,6 +4,7 @@
 			<c:choose>
 				<c:when test="${sessionScope.instituteSessionValid.equals('true')}">
 					<a href="post_job" class="link-style">Post a Job</a> |
+					
  			   </c:when>
  			   <c:when test="${sessionScope.SessionValid.equals('true')}">
 					<a href="profile" class="link-style">My Profile</a>

@@ -3,11 +3,10 @@
 		<div class="w_nav1">
 			<h4>USER DASHBOARD</h4>
 			<ul>
-				<li><a href="1.jsp">Update Personal Info</a></li>
-				<li><a href="2.jsp">Update professional info</a></li>
-				<li><a href="3.jsp">Update Extra Achivements</a></li>
-				<li><a href="4.jsp">View Applied</a></li>
-				<li><a href="5.jsp">Logout</a></li>
+				<li><a href="profile">Update Personal Info</a></li>
+				<li><a href="proffesional_details">Update professional info</a></li>
+				<li><a href="view_applied">View Applied</a></li>
+				<li><a href="dologout">Logout</a></li>
 			</ul>
 		</div>
 	</div>

@@ -246,23 +246,43 @@ public class ClientController {
 		return "viewjobs";
 	}
 
-	@GetMapping("/dashboard")
-	public String getDashboard(Model model) {
-		List<Jobs> joblist = jobsService.findAllJobs();
-		if (joblist != null) {
-			for (int i = 0; i < joblist.size(); i++)
-				System.out.println(joblist.get(i));
-		} else
-			System.out.println("No Jobs");
-		model.addAttribute("joblist", joblist);
-		return "dashboard";
-	}
-
 	@GetMapping("/profile")
-	public String getProfile(Model model) {
-		return "user_personal_details";
+	public String getProfile(HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("SessionValid") != null 
+				&& httpSession.getAttribute("SessionValid").equals("true"))
+			return "user_personal_details";
+		else
+			return "redirect:index";
+
 	}
 
+	@GetMapping("/proffesional_details")
+	public String getProffesional_Details(HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("SessionValid") != null 
+				&& httpSession.getAttribute("SessionValid").equals("true"))
+			return "user_proffessional_details";
+		else
+			return "redirect:index";
+	}
+	
+	@GetMapping("/shortlist")
+	public String getShortlist(HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("instituteSessionValid") != null 
+				&& httpSession.getAttribute("instituteSessionValid").equals("true"))
+			return "shortlist";
+		else
+			return "redirect:index";
+	}
+	
+	@GetMapping("/viewpostedjobs")
+	public String getViewPostedJobs(HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("instituteSessionValid") != null 
+				&& httpSession.getAttribute("instituteSessionValid").equals("true"))
+			return "viewpostedjobs";
+		else
+			return "redirect:index";
+	}
+	
 	@GetMapping("/preferredjob")
 	public String getPreferredJob(Model model) {
 		return "preferredjob";
@@ -290,6 +310,16 @@ public class ClientController {
 		httpSession.invalidate();
 		return "redirect:index";
 	}
+	
+	@GetMapping("/view_applied")
+	public String getViewApplied(HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("SessionValid") != null 
+				&& httpSession.getAttribute("SessionValid").equals("true"))
+			return "view_applied";
+		else
+			return "redirect:index";
+	}
+	
 	@GetMapping("/")
 	public String getHome(Model model) {
 		return "index";
