@@ -1,17 +1,44 @@
 <div id="wrapper">
 	<div id="header">
-		<div style="float:right;">
-		<a href="institute_login" class="link-style">Login as Institute</a> |
-		<a href="login" class="link-style">Login as Candidate</a> |
-		<a href="contact" class="link-style">Contact Us</a> |
-		<a href="about" class="link-style">About</a> |
-		<a href="logout" class="link-style">Logout</a>
+		<div style="float: right;">
+			<c:choose>
+				<c:when test="${empty sessionScope.instituteSessionValid}">
+ 			   <a href="institute_login" class="link-style">Login as Institute</a> |
+				</c:when>
+ 			   <c:when test="${empty sessionScope.SessionValid}">
+ 			   </c:when>
+ 			   <c:when test="${sessionScope.instituteSessionValid.equals('true')}">
+					<a href="post_job" class="link-style">Post a Job</a> |
+ 			   </c:when>
+ 			   <c:when test="${sessionScope.SessionValid.equals('true')}">
+					<a href="profile" class="link-style">My Profile</a>
+ 			   </c:when>
+				<c:otherwise>
+					<a href="login" class="link-style">Login as Candidate</a> | 
+			</c:otherwise>
+			</c:choose>
+			<a href="contact" class="link-style">Contact Us</a> | <a href="about"
+				class="link-style">About</a> |
+			<c:choose>
+				<c:when test="${sessionScope.instituteSessionValid.equals('true')}">
+					<a href="dologout" class="link-style">Logout</a>
+				</c:when>
+				<c:when test="${sessionScope.SessionValid.equals('true')}">
+					<a href="dologout" class="link-style">Logout</a>
+				</c:when>
+			</c:choose>
 		</div>
 		<div id="logo">
-			<h1 style="float:left">
+			<h1 style="float: left">
 				<a href="index">SEEKSHAK</a>
 			</h1>
 		</div>
+		<div style="clear:right;float:right">
+			<h2>Welcome ${sessionScope.institutename} ${sessionScope.fullname}
+		to Seekshuk Job Portal
+			</h2>
+		</div>
+		
 	</div>
 	<!-- end #header -->
 	<div id="menu">

@@ -29,7 +29,7 @@ public class Jobs {
 	@Column(name = "postedby", nullable = false)
 	private String postedby;
 	@Column(name = "postedbyid", nullable = false)
-	private String postedbyid;
+	private int postedbyid;
 	@Column(name = "active", nullable = false)
 	private String active;
 	@Column(name = "job_requirement", nullable = false)
@@ -74,11 +74,11 @@ public class Jobs {
 	public int getIdjobs() {
 		return idjobs;
 	}
-	public String getPostedbyid() {
+	public int getPostedbyid() {
 		return postedbyid;
 	}
-	public void setPostedbyid(String postedbyid) {
-		this.postedbyid = postedbyid;
+	public void setPostedbyid(int postedbyid2) {
+		this.postedbyid = postedbyid2;
 	}
 	public void setIdjobs(int idjobs) {
 		this.idjobs = idjobs;

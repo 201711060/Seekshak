@@ -59,9 +59,10 @@ public class ClientController {
 			sessionValid = false;
 		}
 		if (sessionValid) {
+			httpSession.setAttribute("instituteid", existingInstitute.getIdinstitute());
 			httpSession.setAttribute("institutename", existingInstitute.getInstitutename());
 			httpSession.setAttribute("instituteemail", existingInstitute.getEmail());
-			httpSession.setAttribute("SessionValid", "true");
+			httpSession.setAttribute("instituteSessionValid", "true");
 			httpSession.setAttribute("usertype", "Institute");
 
 			return "redirect:index";
@@ -107,9 +108,13 @@ public class ClientController {
 		}
 	}
 
-	@GetMapping("/postjob")
-	public String getPostJob(Model model) {
-		return "post_job";
+	@GetMapping("/post_job")
+	public String getPostJob(HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("instituteSessionValid") != null 
+				&& httpSession.getAttribute("instituteSessionValid").equals("true"))
+			return "post_job";
+		else
+			return "redirect:index";
 	}
 
 	@PostMapping("/dopostjob")
@@ -123,7 +128,9 @@ public class ClientController {
 		String lastdate = request.getParameter("lastdate");
 		String specialization = request.getParameter("specialization");
 		String jobcategory = request.getParameter("jobcategory");
-
+		String postedby = (String) httpSession.getAttribute("institutename");
+		int postedbyid = (Integer) httpSession.getAttribute("instituteid");
+		
 		Jobs newjob = new Jobs();
 		newjob.setJobtitle(jobtitle);
 		newjob.setJobdescription(jobdescription);
@@ -134,8 +141,12 @@ public class ClientController {
 		newjob.setLastdate(lastdate);
 		newjob.setSpecialization(specialization);
 		newjob.setJobcategory(jobcategory);
-
-		jobsService.saveJob(newjob);
+		newjob.setPostedby(postedby);
+		newjob.setPostedbyid(postedbyid);
+		
+		if(httpSession.getAttribute("instituteSessionValid").equals("true")) {
+			jobsService.saveJob(newjob);
+		}
 		return "redirect:index";
 	}
 
@@ -249,17 +260,12 @@ public class ClientController {
 
 	@GetMapping("/profile")
 	public String getProfile(Model model) {
-		return "profile";
+		return "user_personal_details";
 	}
 
 	@GetMapping("/preferredjob")
 	public String getPreferredJob(Model model) {
 		return "preferredjob";
-	}
-
-	@GetMapping("/alljobs")
-	public String getAllJobs(Model model) {
-		return "alljobs";
 	}
 
 	@GetMapping("/apply")
@@ -279,6 +285,11 @@ public class ClientController {
 		return "index";
 	}
 
+	@GetMapping("/dologout")
+	public String getDoLogout(HttpSession httpSession) {
+		httpSession.invalidate();
+		return "redirect:index";
+	}
 	@GetMapping("/")
 	public String getHome(Model model) {
 		return "index";

@@ -34,34 +34,32 @@
 
 	<!--start-content-->
 	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
+		<div class="col-md-2"></div>
+		<div class="col-md-7">
 			<h3>Latest Jobs</h3>
-			<div class="container">
-				<c:forEach items="${joblist}" var="job">
-					<div class="panel">
-						<div class="panel-heading">
-							<c:out value="${job.postedby}" />
-							<a style="float: right" class="btn btn-primary" href="#"
-								role="button">Apply</a>
-							<p style="float: right; margin: 1%">
-								LastDate:
-								<c:out value="${job.lastdate}" />
-							</p>
-						</div>
-						<div class="panel-body">
-							<c:out value="${job.jobtitle}" />
-						</div>
-						<div class="panel-body">
-							<c:out value="${job.jobdescription}" />
-						</div>
+			<c:forEach items="${joblist}" var="job">
+				<div class="panel1">
+					<div class="panel-title">
+						<c:out value="${job.jobtitle}" /> -
+						<c:out value="${job.postedby}" />
+						<a style="float: right;color:#FFF" class="btn btn-primary" href="#"
+							role="button">Apply</a>
+						<p style="float: right; margin: 1%">
+							LastDate:
+							<c:out value="${job.lastdate}" />
+						</p>
 					</div>
-				</c:forEach>
+					<div class="panel-title">
+						
+					</div>
+					<div class="panel-body">
+						<c:out value="${job.jobdescription}" />
+					</div>
+				</div>
+			</c:forEach>
 
-			</div>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-3">
 			<h3>Jobs Applied</h3>
 			<br>
 			<p class="cdetails">You have not applied to any jobs</p>

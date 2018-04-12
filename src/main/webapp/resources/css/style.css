@@ -75,7 +75,6 @@ a:hover {
 #logo {
 	width: 300px;
 	height: 80px;
-	margin: 0px auto 30px auto;
 	color: #000000;
 }
 
@@ -219,6 +218,8 @@ a:hover {
 	width: 600px;
 	padding: 10px 0px 0px 0px;
 }
+
+
 
 .post {
 }
@@ -2088,6 +2089,12 @@ ul.size li a:hover {
 .latest.products {
 	padding-top: 2%;
 }
+.panel1{
+	border: 1px solid black;
+	width: 200 px;
+	height: 120 px;
+	padding: 50 px;
+}
 h4.panel-title a {
   font-size: 15px;
   text-transform: capitalize;
@@ -2996,8 +3003,8 @@ margin:0;
 	}
 	.logo {
 		margin: 0.5em 0;
-		text-align: center;
-		float: none;
+		text-align: left;
+		float: left;
 	}
 		.fashion-grids:nth-child(2) {
 		padding: 0;
