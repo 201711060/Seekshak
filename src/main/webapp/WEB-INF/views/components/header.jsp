@@ -2,18 +2,14 @@
 	<div id="header">
 		<div style="float: right;">
 			<c:choose>
-				<c:when test="${empty sessionScope.instituteSessionValid}">
- 			   <a href="institute_login" class="link-style">Login as Institute</a> |
-				</c:when>
- 			   <c:when test="${empty sessionScope.SessionValid}">
- 			   </c:when>
- 			   <c:when test="${sessionScope.instituteSessionValid.equals('true')}">
+				<c:when test="${sessionScope.instituteSessionValid.equals('true')}">
 					<a href="post_job" class="link-style">Post a Job</a> |
  			   </c:when>
  			   <c:when test="${sessionScope.SessionValid.equals('true')}">
 					<a href="profile" class="link-style">My Profile</a>
  			   </c:when>
 				<c:otherwise>
+					<a href="institute_login" class="link-style">Login as Institute</a> |
 					<a href="login" class="link-style">Login as Candidate</a> | 
 			</c:otherwise>
 			</c:choose>

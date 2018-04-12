@@ -1,3 +1,4 @@
+<%@include file="components/include_jsp.jsp"%>
 <!DOCTYPE HTML>
 <html>
 <head>
