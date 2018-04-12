@@ -40,49 +40,31 @@
 		<div class="container">
 			<div class="products-grids">
 				<div class="col-md-8 products-grid-left">
-					<form action="shortlist.jsp" method="post">
+					<form action="doshortlist" method="get">
 						<div class="account-top heading">
 							<h3>Institute dashboard</h3>
 						</div>
+						<select name="job_id">
+						<c:forEach items="${joblist}" var="job">
+						<option value="${job.idjobs}">${job.idjobs} - ${job.jobtitle}</option>
+						</c:forEach>
+						</select>
+						<input type="Submit" >
+						
 						<table width="100%" bgcolor="#f1f1f1">
+						<c:forEach items="${userlist}" var="user">
 							<tr>
-								<td></td>
+								<td>${user.fullname}</td>
+								<td>${user.qualification}</td>
+								<td>${user.experience}</td>
+								<td>${user.emailid}</td>
+								<td>${user.mobileno}</td>
 							</tr>
-							<tr>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-							</tr>
-							<tr>
-								<td></td>
-							</tr>
-
-							<tr>
-								<td>Candidate name:</td>
-							</tr>
-							<tr>
-								<td>Job name</td>
-							</tr>
-							<tr>
-								<td>Applied date</td>
-							</tr>
-							<tr>
-								<td>Job status</td>
-							</tr>
-							<tr>
-								<td>Candidate email</td>
-							</tr>
-
 							<tr>
 								<td><hr></td>
 							</tr>
+							</c:forEach>
+						
 						</table>
 
 

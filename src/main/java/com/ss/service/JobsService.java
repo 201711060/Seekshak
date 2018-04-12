@@ -38,6 +38,10 @@ public class JobsService {
 		return dao.findByCategory(jobcategory);
 	}
 	
+	public List<Jobs> findByPostedByID(int postedByid) {
+		return dao.findByPostedByID(postedByid);
+	}
+
 	public void updateEmployee(Jobs job) {
 		dao.updateEmployee(job);
 	}

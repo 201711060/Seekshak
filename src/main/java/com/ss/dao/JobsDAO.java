@@ -17,4 +17,5 @@ public interface JobsDAO {
 
 	List<Jobs> findByCategory(String jobcategory);
 
+	List<Jobs> findByPostedByID(int id);
 }

@@ -1,5 +1,6 @@
 package com.ss.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +14,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.ss.entity.User;
+import com.ss.dao.JobsApplicationDAOImpl;
 import com.ss.entity.Institute;
+import com.ss.entity.Job_Application;
 import com.ss.entity.Jobs;
 import com.ss.service.UserService;
 import com.ss.service.InstituteService;
+import com.ss.service.JobsApplicationService;
 import com.ss.service.JobsService;
 
 @Controller
@@ -31,6 +35,9 @@ public class ClientController {
 	@Autowired
 	InstituteService instituteService;
 
+	@Autowired
+	JobsApplicationService jobsApplicationService;
+	
 	@GetMapping("/institute_login")
 	public String getInstituteLogin(Model model) {
 		return "institute_login";
@@ -97,6 +104,7 @@ public class ClientController {
 			sessionValid = false;
 		}
 		if (sessionValid) {
+			httpSession.setAttribute("candidate_id", user.getIduserinfo());
 			httpSession.setAttribute("fullname", user.getFullname());
 			httpSession.setAttribute("email", user.getEmailid());
 			httpSession.setAttribute("SessionValid", "true");
@@ -268,8 +276,36 @@ public class ClientController {
 	@GetMapping("/shortlist")
 	public String getShortlist(HttpSession httpSession, Model model) {
 		if(httpSession.getAttribute("instituteSessionValid") != null 
-				&& httpSession.getAttribute("instituteSessionValid").equals("true"))
+				&& httpSession.getAttribute("instituteSessionValid").equals("true")) {
+			int postedByid = (Integer)httpSession.getAttribute("instituteid");
+			List<Jobs> joblist = jobsService.findByPostedByID(postedByid);
+			model.addAttribute("joblist", joblist);
+			
 			return "shortlist";
+		}
+		else
+			return "redirect:index";
+	}
+	
+	@GetMapping("/doshortlist")
+	public String getDoShortlist(HttpServletRequest request, HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("instituteSessionValid") != null 
+				&& httpSession.getAttribute("instituteSessionValid").equals("true")) {
+			int postedByid = (Integer)httpSession.getAttribute("instituteid");
+			List<Jobs> joblist = jobsService.findByPostedByID(postedByid);
+			model.addAttribute("joblist", joblist);
+			int job_id = Integer.parseInt(request.getParameter("job_id"));
+			List<Job_Application> job_Application = jobsApplicationService.findByJobID(job_id);
+			int i =0;
+			List<User> userList = new ArrayList<User>();
+			while(!job_Application.isEmpty()) {
+				Job_Application myJob = job_Application.remove(i);
+				System.out.println("CandidateID "+myJob.getCandidate_id());
+				userList.add(userService.findByUserId(myJob.getCandidate_id()));
+			}
+			model.addAttribute("userlist", userList);
+			return "shortlist";
+		}
 		else
 			return "redirect:index";
 	}
@@ -277,8 +313,12 @@ public class ClientController {
 	@GetMapping("/viewpostedjobs")
 	public String getViewPostedJobs(HttpSession httpSession, Model model) {
 		if(httpSession.getAttribute("instituteSessionValid") != null 
-				&& httpSession.getAttribute("instituteSessionValid").equals("true"))
+				&& httpSession.getAttribute("instituteSessionValid").equals("true")) {
+			int postedByid = (Integer)httpSession.getAttribute("instituteid");
+			List<Jobs> myJobs = jobsService.findByPostedByID(postedByid);
+			model.addAttribute("joblist", myJobs);
 			return "viewpostedjobs";
+		}
 		else
 			return "redirect:index";
 	}
@@ -288,9 +328,20 @@ public class ClientController {
 		return "preferredjob";
 	}
 
-	@GetMapping("/apply")
-	public String getApply(Model model) {
-		return "apply";
+	@PostMapping("/doapply")
+	public String getApply(HttpServletRequest request, HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("SessionValid") != null 
+				&& httpSession.getAttribute("SessionValid").equals("true")) {
+			int candidate_id = (Integer)httpSession.getAttribute("candidate_id");
+			int job_id = Integer.parseInt(request.getParameter("job_id"));
+			Job_Application jobApplication = new Job_Application();
+			jobApplication.setCandidate_id(candidate_id);
+			jobApplication.setJob_id(job_id);
+			jobsApplicationService.saveApplication(jobApplication);
+			return "view_applied";
+		}
+		else
+			return "redirect:index";
 	}
 
 	@GetMapping("/index")
@@ -312,10 +363,20 @@ public class ClientController {
 	}
 	
 	@GetMapping("/view_applied")
-	public String getViewApplied(HttpSession httpSession, Model model) {
+	public String getViewApplied(HttpServletRequest request, HttpSession httpSession, Model model) {
 		if(httpSession.getAttribute("SessionValid") != null 
-				&& httpSession.getAttribute("SessionValid").equals("true"))
+				&& httpSession.getAttribute("SessionValid").equals("true")) {
+			int candidate_id = (Integer)httpSession.getAttribute("candidate_id");
+			List<Job_Application> myJobs = jobsApplicationService.findByCandidateId(candidate_id);
+			int i = 0;
+			List<Jobs> jobList= new ArrayList<Jobs>();
+			while(!myJobs.isEmpty()) {
+				Job_Application job = myJobs.remove(i);
+				jobList.add(jobsService.findById(job.job_id));
+			}
+			model.addAttribute("joblist", jobList);
 			return "view_applied";
+		}
 		else
 			return "redirect:index";
 	}

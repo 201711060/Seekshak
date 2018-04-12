@@ -36,6 +36,10 @@ public class UserService {
 		return userdao.findByid(id);
 	}
 
+	public User findByUserId(int id) {
+		return userdao.findByUserId(id);
+	}
+
 	public List<User> findByCategory(String jobcategory) {
 		return userdao.findByCategory(jobcategory);
 	}

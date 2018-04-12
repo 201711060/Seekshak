@@ -14,7 +14,6 @@ import com.ss.entity.Jobs;
 public class UserDAOImpl extends AbstractDAO implements UserDAO {
 
 	public void saveUser(User user) {
-		// TODO Auto-generated method stub
 		persist(user);
 	}
 
@@ -68,6 +67,12 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
 	public void updateUser(User user) {
 		// TODO Auto-generated method stub
 		getSession().update(user);
+	}
+
+	public User findByUserId(int id) {
+		Criteria criteria = getSession().createCriteria(User.class);
+		criteria.add(Restrictions.eq("iduserinfo", id));
+		return (User) criteria.uniqueResult();
 	}
 
 }

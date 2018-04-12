@@ -49,8 +49,6 @@
 								<c:out value="${job.jobtitle}" />
 								-
 								<c:out value="${job.postedby}" />
-								<a style="float: right; color: #FFF" class="btn btn-primary"
-									href="#" role="button">Apply</a>
 								<p style="float: right; margin: 1%">
 									LastDate:
 									<c:out value="${job.lastdate}" />

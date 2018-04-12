@@ -53,7 +53,7 @@ public class JobsDAOImpl extends AbstractDAO implements JobsDAO {
 	public Jobs findByid(int id) {
 		// TODO Auto-generated method stub
 		Criteria criteria = getSession().createCriteria(Jobs.class);
-		criteria.add(Restrictions.eq("id", id));
+		criteria.add(Restrictions.eq("idjobs", id));
 		return (Jobs) criteria.uniqueResult();
 	}
 
@@ -67,6 +67,13 @@ public class JobsDAOImpl extends AbstractDAO implements JobsDAO {
 	public void updateEmployee(Jobs job) {
 		// TODO Auto-generated method stub
 		getSession().update(job);
+	}
+
+	public List<Jobs> findByPostedByID(int id) {
+		// TODO Auto-generated method stub
+		Criteria criteria = getSession().createCriteria(Jobs.class);
+		criteria.add(Restrictions.eq("postedbyid", id));
+		return criteria.list();
 	}
 
 }

@@ -12,7 +12,5 @@
 				<li><a href="dologout"><b>logout</b></a></li>
 			</ul>
 		</div>
-
-
 	</div>
 </div>
