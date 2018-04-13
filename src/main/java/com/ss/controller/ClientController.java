@@ -222,7 +222,7 @@ public class ClientController {
 		institute.setEmail(email);
 		institute.setPassword(pwd);
 		Institute existingInstitute = instituteService.findById(email);
-		if(existingInstitute!=null)
+		if(existingInstitute!=null && !existingInstitute.getEmail().equals(email))
 			instituteService.saveInstitute(institute);
 		return "redirect:index";
 	}
