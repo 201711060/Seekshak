@@ -372,10 +372,11 @@ public class ClientController {
 			List<Jobs> jobList= new ArrayList<Jobs>();
 			while(!myJobs.isEmpty()) {
 				Job_Application job = myJobs.remove(i);
+				System.out.println(job);
 				jobList.add(jobsService.findById(job.job_id));
 			}
 			model.addAttribute("joblist", jobList);
-			return "view_applied";
+			return "redirect:view_applied";
 		}
 		else
 			return "redirect:index";
