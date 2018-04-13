@@ -16,4 +16,7 @@ public interface JobApplicationDAO {
     void updateJobApplication(Job_Application jobApplication);
 
 	List<Job_Application> findByJobID(int jobid);
+	
+	Job_Application findByJobIDCandidateID(int jobID, int candidateID);
+	
 }

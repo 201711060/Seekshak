@@ -35,5 +35,9 @@ public class JobsApplicationService {
 	public List<Job_Application> findByJobID(int jobid) {
 		return jobsApplicationdao.findByJobID(jobid);
 	}
-
+	
+	public Job_Application findByJobIDCandidateID(int jobID, int candidateID) {
+		return jobsApplicationdao.findByJobIDCandidateID(jobID, candidateID);
+	}
+	
 }

@@ -42,4 +42,12 @@ public class JobsApplicationDAOImpl extends AbstractDAO implements JobApplicatio
 		return criteria.list();
 	}
 
+
+	public Job_Application findByJobIDCandidateID(int jobID, int candidateID) {
+		Criteria criteria = getSession().createCriteria(Job_Application.class);
+		criteria.add(Restrictions.eq("candidate_id", candidateID));
+		criteria.add(Restrictions.eq("job_id", jobID));
+		return (Job_Application) criteria.uniqueResult();
+	}
+
 }

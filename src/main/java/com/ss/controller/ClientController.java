@@ -182,7 +182,6 @@ public class ClientController {
 		if(existinguser!=null && newUser.getEmailid().equals(existinguser.getEmailid())){
 			return "redirect:register_user";
 		}else{
-			System.out.println(newUser.toString());
 			userService.saveUser(newUser);
 			return "redirect:index";	
 		}
@@ -222,8 +221,9 @@ public class ClientController {
 		institute.setContactno(contactno);
 		institute.setEmail(email);
 		institute.setPassword(pwd);
-		
-		instituteService.saveInstitute(institute);
+		Institute existingInstitute = instituteService.findById(email);
+		if(existingInstitute!=null)
+			instituteService.saveInstitute(institute);
 		return "redirect:index";
 	}
 
@@ -261,7 +261,6 @@ public class ClientController {
 			return "user_personal_details";
 		else
 			return "redirect:index";
-
 	}
 
 	@GetMapping("/proffesional_details")
@@ -337,8 +336,12 @@ public class ClientController {
 			Job_Application jobApplication = new Job_Application();
 			jobApplication.setCandidate_id(candidate_id);
 			jobApplication.setJob_id(job_id);
-			jobsApplicationService.saveApplication(jobApplication);
-			return "view_applied";
+			Job_Application existingJobApplication = jobsApplicationService.findByJobIDCandidateID(job_id, candidate_id);
+			if(existingJobApplication!=null) {
+				jobsApplicationService.saveApplication(jobApplication);
+				return "redirect:view_applied";
+			}else
+				return "redirect:index";
 		}
 		else
 			return "redirect:index";
@@ -372,11 +375,10 @@ public class ClientController {
 			List<Jobs> jobList= new ArrayList<Jobs>();
 			while(!myJobs.isEmpty()) {
 				Job_Application job = myJobs.remove(i);
-				System.out.println(job);
 				jobList.add(jobsService.findById(job.job_id));
 			}
 			model.addAttribute("joblist", jobList);
-			return "redirect:view_applied";
+			return "view_applied";
 		}
 		else
 			return "redirect:index";
