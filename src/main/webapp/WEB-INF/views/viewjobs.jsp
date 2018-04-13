@@ -38,24 +38,27 @@
 		<div class="col-md-7">
 			<h3>Latest Jobs</h3>
 			<c:forEach items="${joblist}" var="job">
-				<div class="panel1">
-					<div class="panel-title">
-						<c:out value="${job.jobtitle}" /> -
-						<c:out value="${job.postedby}" />
-						<a style="float: right;color:#FFF" class="btn btn-primary" href="#"
-							role="button">Apply</a>
-						<p style="float: right; margin: 1%">
-							LastDate:
-							<c:out value="${job.lastdate}" />
-						</p>
-					</div>
-					<div class="panel-title">
-						
+				<form action="doapply" method="post">
+					<div class="panel1">
+						<div class="panel-title">
+							<h3 style="padding: 1%; width:600px; float:left"><c:out value="${job.jobtitle}" /> - 
+							<c:out value="${job.postedby}" /></h3>
+							<div style="float: right; margin: 1%; width:100px">
+								<input type="Submit" class="link-style" value="Apply"/>
+							</div>
+							<p style="float: right; margin: 1%; width:100px">
+								LastDate:
+								<c:out value="${job.lastdate}" />
+								<br>
+							</p>
 					</div>
 					<div class="panel-body">
-						<c:out value="${job.jobdescription}" />
+						<p style="float:left; clear:both"><c:out value="${job.jobdescription}" /></p>
 					</div>
+					
 				</div>
+				<input type="hidden" name="job_id" value="${job.idjobs}">
+				</form>
 			</c:forEach>
 
 		</div>
