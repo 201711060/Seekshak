@@ -337,7 +337,8 @@ public class ClientController {
 			jobApplication.setCandidate_id(candidate_id);
 			jobApplication.setJob_id(job_id);
 			Job_Application existingJobApplication = jobsApplicationService.findByJobIDCandidateID(job_id, candidate_id);
-			if(existingJobApplication!=null) {
+			if(existingJobApplication!=null && existingJobApplication.getCandidate_id()!=candidate_id 
+					&& existingJobApplication.getJob_id()!=job_id) {
 				jobsApplicationService.saveApplication(jobApplication);
 				return "redirect:view_applied";
 			}else
