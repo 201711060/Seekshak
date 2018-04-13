@@ -56,3 +56,4 @@
 		</ul>
 	</div>
 </div>
+<p align="center" style="color:red">${error}</p>

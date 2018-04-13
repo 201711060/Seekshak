@@ -341,8 +341,10 @@ public class ClientController {
 					&& existingJobApplication.getJob_id()!=job_id) {
 				jobsApplicationService.saveApplication(jobApplication);
 				return "redirect:view_applied";
-			}else
-				return "redirect:index";
+			}else {
+				//model.addAttribute("error", "You have already applied for this job");
+				return "redirect:view_applied";
+			}
 		}
 		else
 			return "redirect:index";
