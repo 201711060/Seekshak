@@ -27,6 +27,16 @@ public class User_Proffesional_Detail {
 	private String grad_cpi;
 	@Column(name = "twelve", nullable = false)
 	private String twelve;
+	@Column(name = "tenth", nullable = false)
+	private String tenth;
+	
+	public String getTenth() {
+		return tenth;
+	}
+
+	public void setTenth(String tenth) {
+		this.tenth = tenth;
+	}
 
 	public int getIduser_proffesional_detail() {
 		return iduser_proffesional_detail;

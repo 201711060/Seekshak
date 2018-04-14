@@ -326,10 +326,23 @@ public class ClientController {
 			List<Job_Application> job_Application = jobsApplicationService.findByJobID(job_id);
 			int i =0;
 			List<User> userList = new ArrayList<User>();
+			List<Integer> perfScore = new ArrayList<Integer>();
+			
 			while(!job_Application.isEmpty()) {
 				Job_Application myJob = job_Application.remove(i);
-				System.out.println("CandidateID "+myJob.getCandidate_id());
-				userList.add(userService.findByUserId(myJob.getCandidate_id()));
+				User candidate = userService.findByUserId(myJob.getCandidate_id());
+				
+				User_Proffesional_Detail candidate_p = userPService.findByUserId(myJob.getCandidate_id());
+				int p1 = Integer.parseInt(candidate_p.getTwelve());
+				int p2 = Integer.parseInt(candidate_p.getGrad_cpi());
+				int p3 = Integer.parseInt(candidate_p.getPostgrad_branch());
+
+				Research r = researchService.findByUserId(myJob.getCandidate_id());
+				int p4 = Integer.parseInt(r.getImpact_factor());
+				int p5 = (r.getNo_research());
+				
+				
+				userList.add(candidate);
 			}
 			model.addAttribute("userlist", userList);
 			return "shortlist";
@@ -452,6 +465,7 @@ public class ClientController {
 			String grad_branch=(String) request.getParameter("grad_branch");
 			String grad_cpi=(String) request.getParameter("grad_cpi");
 			String twelve=(String) request.getParameter("twelve");
+			String tenth=(String) request.getParameter("tenth");
 			
 			int no_research=Integer.parseInt(request.getParameter("no_research"));
 			String paper_title=(String) request.getParameter("paper_title");
@@ -470,7 +484,7 @@ public class ClientController {
 			user.setTagline(tagline);
 			userService.updateUser(user);
 			Research research = researchService.findByUserId(candidate_id);
-			if(research!=null && research.getUser_id()!=candidate_id) {
+			if(research!=null && research.getUser_id()==candidate_id) {
 				research.setImpact_factor(impact_factor);
 				research.setIssn(issn_no);
 				research.setNo_research(no_research);
@@ -502,6 +516,7 @@ public class ClientController {
 				userpdetail.setGrad_branch(grad_branch);
 				userpdetail.setGrad_cpi(grad_cpi);
 				userpdetail.setTwelve(twelve);
+				userpdetail.setTenth(tenth);
 				userPService.updateUser(userpdetail);	
 
 			}else {

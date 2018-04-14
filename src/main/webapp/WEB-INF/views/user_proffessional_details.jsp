@@ -84,6 +84,10 @@
 								width="70%" value="${userDetail.twelve}">
 						</div>
 						<div class="address">
+							<span>10th Percentage Obtained</span> <input type="text" name="tenth"
+								width="70%" value="${userDetail.tenth}">
+						</div>
+						<div class="address">
 							<span>No. of Researches(Enter 0 for none)</span> <input
 								type="text" name="no_research" id="no_research" width="70%" value="${research.no_research}">
 						</div>

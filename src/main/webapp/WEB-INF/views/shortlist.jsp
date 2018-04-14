@@ -45,40 +45,38 @@
 							<h3>Institute dashboard</h3>
 						</div>
 						<select name="job_id">
-						<c:forEach items="${joblist}" var="job">
-						<option value="${job.idjobs}">${job.idjobs} - ${job.jobtitle}</option>
-						</c:forEach>
-						</select>
-						<input type="Submit" >
-						
-						<table width="100%" bgcolor="#f1f1f1">
-						<c:forEach items="${userlist}" var="user">
-							<tr>
-								<td>${user.fullname}</td>
-								<td>${user.qualification}</td>
-								<td>${user.experience}</td>
-								<td>${user.emailid}</td>
-								<td>${user.mobileno}</td>
-							</tr>
-							<tr>
-								<td><hr></td>
-							</tr>
+							<c:forEach items="${joblist}" var="job">
+								<option value="${job.idjobs}">${job.idjobs}-
+									${job.jobtitle}</option>
 							</c:forEach>
-						
+						</select> <input type="Submit">
+					</form>
+					<br>
+					<form action="doshortlist" method="post">
+						<table width="100%" bgcolor="#f1f1f1" border="1">
+							<c:forEach items="${userlist}" var="user" varStatus="status">
+								<tr>
+									<td><input type="checkbox" name="selected"
+										value="${user.iduserinfo}"></td>
+									<td>${user.fullname}</td>
+									<td>${user.qualification}</td>
+									<td>${user.experience}</td>
+									<td>${user.emailid}</td>
+									<td>${user.mobileno}</td>
+								</tr>
+							</c:forEach>
+							<tr><td></td></tr>						
 						</table>
-
-
-
+						<br/>
+						<input type="Submit" value="Mail Shortlisted Candidates">
 					</form>
 
 
-					<br> <br> <br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
+
+
+
+					<br> <br> <br> <br> <br> <br> <br>
+					<br> <br>
 
 
 
