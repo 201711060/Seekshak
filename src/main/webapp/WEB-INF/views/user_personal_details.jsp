@@ -48,6 +48,10 @@
 								width="70%" value="${user.fullname}">
 						</div>
 						<div class="address">
+							<span>Experience</span> <input type="text" name="experience" id="name"
+								width="70%" value="${user.experience}">
+						</div>
+						<div class="address">
 							<span>City</span> <input type="textbox" name="city" id="addr"
 								width="50%" value="${user.location}">
 						</div>

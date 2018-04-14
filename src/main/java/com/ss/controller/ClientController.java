@@ -389,7 +389,14 @@ public class ClientController {
 			int job_id = Integer.parseInt(request.getParameter("job_id"));
 			User user = userService.findByUserId(candidate_id);
 			User_Proffesional_Detail userp = userPService.findByUserId(candidate_id);
-			
+			if(user==null) {
+				model.addAttribute("error", "Please Complete the profile before applying for this job");
+				return "user_personal_details";
+			}
+			if(userp==null) {
+				model.addAttribute("error", "Please Complete the profile before applying for this job");
+				return "user_proffessional_details";
+			}
 			if(user!=null && userp!=null) {
 				if(user.getDob()!=null && !user.getDob().isEmpty() 
 						&& user.getEmailid()!=null && !user.getEmailid().isEmpty()
@@ -401,7 +408,7 @@ public class ClientController {
 					
 				}else {
 					model.addAttribute("error", "Please Complete the profile before applying for this job");
-					return "redirect:profile";
+					return "user_personal_details";
 				}
 				if(userp.getGrad_branch()!=null && !userp.getGrad_branch().isEmpty() 
 						&& userp.getGrad_cpi()!=null && !userp.getGrad_cpi().isEmpty()
@@ -413,7 +420,7 @@ public class ClientController {
 					
 				}else {
 					model.addAttribute("error", "Please Complete the profile before applying for this job");
-					return "redirect:proffesional_details";
+					return "user_proffessional_details";
 				}
 			}
 			
@@ -438,11 +445,8 @@ public class ClientController {
 	public String getIndex(Model model) {
 		List<Jobs> joblist = jobsService.findAllJobs();
 		if (joblist != null) {
-			for (int i = 0; i < joblist.size(); i++)
-				System.out.println(joblist.get(i));
-		} else
-			System.out.println("No Jobs");
-		model.addAttribute("joblist", joblist);
+			model.addAttribute("joblist", joblist);
+		} 
 		return "index";
 	}
 
@@ -479,9 +483,8 @@ public class ClientController {
 			String location=(String) request.getParameter("city");
 			String dob=(String) request.getParameter("dob");
 			String mobileno=(String) request.getParameter("mobile");
-			String test = (String) request.getParameter("test");
-			
-			System.out.println(test);
+			String experience = (String) request.getParameter("experience");
+
 			int candidate_id = (Integer)httpSession.getAttribute("candidate_id");
 			User user = userService.findByUserId(candidate_id);
 			
@@ -489,7 +492,8 @@ public class ClientController {
 			user.setLocation(location);
 			user.setDob(dob);
 			user.setMobileno(mobileno);
-			System.out.println(user);
+			user.setExperience(experience);
+			
 			userService.updateUser(user);
 			return "redirect:profile";
 		}else {
@@ -724,7 +728,7 @@ public class ClientController {
 	
 	@GetMapping("/")
 	public String getHome(Model model) {
-		return "index";
+		return "redirect:index";
 	}
 	
 }
