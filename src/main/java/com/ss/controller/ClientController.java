@@ -166,7 +166,11 @@ public class ClientController {
 		newjob.setPostedbyid(postedbyid);
 		
 		if(httpSession.getAttribute("instituteSessionValid").equals("true")) {
-			jobsService.saveJob(newjob);
+			Institute institute = instituteService.findByInstituteId(postedbyid);
+			if(institute!=null && institute.getActive().equals("active"))
+				jobsService.saveJob(newjob);
+			else
+				model.addAttribute("error", "Your account is not Verified yet");
 		}
 		return "redirect:index";
 	}
