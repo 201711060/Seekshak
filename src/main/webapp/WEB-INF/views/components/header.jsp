@@ -13,8 +13,9 @@
 					<a href="admin_dashboard" class="link-style">Admin Dashboard</a>
  			   </c:when>
 				<c:otherwise>
-					<a href="institute_login" class="link-style">Login as Institute</a> |
-					<a href="login" class="link-style">Login as Candidate</a> | 
+					<a href="institute_login" class="link-style">Institute Login</a> |
+					<a href="login" class="link-style">Candidate Login</a> | 
+					<a href="admin_login" class="link-style">Admin Login</a> |
 			</c:otherwise>
 			</c:choose>
 			<a href="contact" class="link-style">Contact Us</a> | <a href="about"
@@ -24,6 +25,9 @@
 					<a href="dologout" class="link-style">Logout</a>
 				</c:when>
 				<c:when test="${sessionScope.SessionValid.equals('true')}">
+					<a href="dologout" class="link-style">Logout</a>
+				</c:when>
+				<c:when test="${sessionScope.adminSessionValid.equals('true')}">
 					<a href="dologout" class="link-style">Logout</a>
 				</c:when>
 			</c:choose>
