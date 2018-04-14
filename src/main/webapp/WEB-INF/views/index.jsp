@@ -38,14 +38,21 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-7">
 			<h3>Latest Jobs</h3>
+			<c:if test="${empty joblist}">
+				<p align="center">
+					No Jobs in posted this category
+					<p /> 
+					</c:if>
 			<c:forEach items="${joblist}" var="job">
-				<form action="doapply" method="post">
+						<form action="doapply" method="post">
 					<div class="panel1">
 						<div class="panel-title">
-							<h3 style="padding: 1%; width:600px; float:left"><c:out value="${job.jobtitle}" /> - 
-							<c:out value="${job.postedby}" /></h3>
+							<h3 style="padding: 1%; width:600px; float:left">
+										<c:out value="${job.jobtitle}" /> - 
+							<c:out value="${job.postedby}" />
+									</h3>
 							<div style="float: right; margin: 1%; width:100px">
-								<input type="Submit" class="link-style" value="Apply"/>
+								<input type="Submit" class="link-style" value="Apply" />
 							</div>
 							<p style="float: right; margin: 1%; width:100px">
 								LastDate:
@@ -54,7 +61,9 @@
 							</p>
 					</div>
 					<div class="panel-body">
-						<p style="float:left; clear:both"><c:out value="${job.jobdescription}" /></p>
+						<p style="float:left; clear:both">
+										<c:out value="${job.jobdescription}" />
+									</p>
 					</div>
 					
 				</div>
@@ -62,12 +71,9 @@
 				</form>
 			</c:forEach>
 
-		</div>
-		<div class="col-md-3">
-			<h3>Jobs Applied</h3>
-			<br>
-			<p class="cdetails">You have not applied to any jobs</p>
-		</div>
+		
+				</div>
+		
 	</div>
 
 	<!--//end-content-->

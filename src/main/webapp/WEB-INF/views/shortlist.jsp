@@ -54,6 +54,15 @@
 					<br>
 					<form action="doshortlist" method="post">
 						<table width="100%" bgcolor="#f1f1f1" border="1">
+							<tr>
+							<th></th>
+							<th>Name</th>
+							<th>Qualification</th>
+							<th>Experience</th>
+							<th>Email ID</th>
+							<th>Mobile No</th>
+							<th>Performance</th>
+							</tr>
 							<c:forEach items="${userlist}" var="user" varStatus="status">
 								<tr>
 									<td><input type="checkbox" name="selected"

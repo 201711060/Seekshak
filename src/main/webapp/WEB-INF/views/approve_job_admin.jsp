@@ -39,9 +39,12 @@
 			<div class="products-grids">
 				<div class="col-md-8 products-grid-left">
 						<div class="account-top heading">
-							<h3>ADMIN</h3>
+							<h3>ADMIN Job Approval</h3>
 						</div>
 
+						<c:if test="${empty jobList}"> 
+						<p align="center"> No Jobs to Approve <p/> 
+						</c:if>
 						<table width="100%" bgcolor="#f1f1f1">
 							<c:forEach items="${jobList}" var="job">
 							<form action="doapprovejob" method="post">

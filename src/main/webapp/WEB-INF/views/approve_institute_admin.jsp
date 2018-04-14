@@ -46,8 +46,12 @@
 				<div class="col-md-8 products-grid-left">
 
 					<div class="account-top heading">
-						<h3>ADMIN</h3>
+						<h3>ADMIN Institute Approval</h3>
 					</div>
+
+					<c:if test="${empty instituteList}"> 
+					<p align="center"> No Institutes to Approve <p/> 
+					</c:if>
 
 					<table width="100%" bgcolor="#f1f1f1">
 						<c:forEach items="${instituteList}" var="institute">
@@ -57,8 +61,6 @@
 									<td>${institute.institutecategory }</td>
 									<td>${institute.institutewebsite }</td>
 									<td>${institute.email }</td>
-
-
 									<td><input type="hidden" name="idinstitute"
 										value="${institute.idinstitute }"> <input
 										type="submit" class="link-style" value="Approve "></td>

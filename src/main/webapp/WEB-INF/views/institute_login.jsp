@@ -59,24 +59,9 @@
 							</div>
 						</form>
 							<div class="address">
-
 								<a href="register_institute" style="color:#FFF" class="link-style" >Register 
-									
 								</a>
-
 							</div>
-
-
-						Admin???
-						<div class="address">
-							<a href="admin_login.jsp"> <input type="submit"
-								class="link-style" value="Login as Admin">
-							</a>
-						</div>
-
-
-
-
 					</div>
 				</div>
 			</div>

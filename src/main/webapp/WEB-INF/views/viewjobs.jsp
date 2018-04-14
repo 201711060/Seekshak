@@ -37,6 +37,9 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-7">
 			<h3>Latest Jobs</h3>
+			<c:if test="${empty joblist}"> 
+					<p align="center"> No Jobs in posted this category<p/> 
+					</c:if>
 			<c:forEach items="${joblist}" var="job">
 				<form action="doapply" method="post">
 					<div class="panel1">
@@ -63,9 +66,7 @@
 
 		</div>
 		<div class="col-md-3">
-			<h3>Jobs Applied</h3>
-			<br>
-			<p class="cdetails">You have not applied to any jobs</p>
+			
 		</div>
 	</div>
 
