@@ -333,14 +333,17 @@ public class ClientController {
 				User candidate = userService.findByUserId(myJob.getCandidate_id());
 				
 				User_Proffesional_Detail candidate_p = userPService.findByUserId(myJob.getCandidate_id());
-				int p1 = Integer.parseInt(candidate_p.getTwelve());
-				int p2 = Integer.parseInt(candidate_p.getGrad_cpi());
-				int p3 = Integer.parseInt(candidate_p.getPostgrad_branch());
-
+				if(candidate_p!=null) {
+					float p0 = Float.parseFloat(candidate_p.getTenth());
+					float p1 = Float.parseFloat(candidate_p.getTwelve());
+					float p2 = Float.parseFloat(candidate_p.getGrad_cpi());
+					float p3 = Float.parseFloat(candidate_p.getPg_cpi());
+				}
 				Research r = researchService.findByUserId(myJob.getCandidate_id());
-				int p4 = Integer.parseInt(r.getImpact_factor());
-				int p5 = (r.getNo_research());
-				
+				if(r!=null) {
+					float p4 = Float.parseFloat(r.getImpact_factor());
+					float p5 = (float)(r.getNo_research());
+				}
 				
 				userList.add(candidate);
 			}
