@@ -13,9 +13,6 @@ public class User {
 	@Column(name = "iduserinfo", nullable = false)
 	private int iduserinfo;
 	
-	@Column(name = "username", nullable = false)
-	private String username;
-	
 	@Column(name = "password", nullable = false)
 	private String password;
 	
@@ -52,14 +49,6 @@ public class User {
 
 	public void setIduserinfo(int iduserinfo) {
 		this.iduserinfo = iduserinfo;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {
@@ -144,7 +133,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [iduserinfo=" + iduserinfo + ", username=" + username + ", password=" + password + ", fullname="
+		return "User [iduserinfo=" + iduserinfo  + ", password=" + password + ", fullname="
 				+ fullname + ", emailid=" + emailid + ", mobileno=" + mobileno + ", location=" + location + ", tagline="
 				+ tagline + ", qualification=" + qualification + ", dob=" + dob + ", experience=" + experience
 				+ ", research_paper_id=" + research_paper_id + "]";

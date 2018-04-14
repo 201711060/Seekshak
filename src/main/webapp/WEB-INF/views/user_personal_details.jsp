@@ -39,53 +39,33 @@
 		<div class="container">
 			<div class="products-grids">
 				<div class="col-md-8 products-grid-left">
-					<form action="user_dashboard_code.jsp" method="post">
+					<form action="doupdatepersonaldetails" method="post">
 						<div class="account-top heading">
 							<h3>User Details</h3>
 						</div>
 						<div class="address">
-							<span>First name</span> <input type="text" name="f_name_user"
-								id="f_name_user" width="70%">
-						</div>
-
-						<div class="address">
-							<span>Last name</span> <input type="text" name="l_name_user"
-								id="l_name_user" width="70%">
+							<span>Name</span> <input type="text" name="name" id="name"
+								width="70%" value="${user.fullname}">
 						</div>
 						<div class="address">
-							<span>Address</span> <input type="textbox" name="addr" id="addr"
-								width="30%">
+							<span>City</span> <input type="textbox" name="city" id="addr"
+								width="50%" value="${user.location}">
+						</div>
+						<div class="address">
+							<span>Mobile</span> <input type="text" name="mobile" id="contact"
+								width="70%" value="${user.mobileno }">
+						</div>
+						<div class="address">
+							<span>Date of birth</span> <input type="text" name="dob" id="dob"
+								width="70%" value="${user.dob }">
+						</div>
+						
+						<div class="address">
+							<input type="submit" class="link-style" value="Update">
 						</div>
 					</form>
-					<div class="address">
-						<span>Contact No.</span> <input type="text" name="contact"
-							id="contact" width="70%">
-					</div>
-					<div class="address">
-						<span>Email_id </span> <input type="text" name="email" id="email"
-							width="70%">
-					</div>
-					<div class="address">
-						<span>Date of birth</span> <input type="text" name="dob" id="dob"
-							width="70%">
-					</div>
-					<div class="address">
-						<span>Gender</span> <input type="text" name="gender" id="gender"
-							width="70%">
-					</div>
-					<div class="address">
-						<a href="update_proffessional_details_code.jsp"> <input
-							type="submit" class="link-style" value="Update">
-						</a>
-					</div>
-
-					<br> <br> <br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
-					<br>
+					<br> <br> <br> <br> <br> <br> <br>
+					<br> <br>
 
 
 
