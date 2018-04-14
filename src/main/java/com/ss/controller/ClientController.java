@@ -387,16 +387,46 @@ public class ClientController {
 				&& httpSession.getAttribute("SessionValid").equals("true")) {
 			int candidate_id = (Integer)httpSession.getAttribute("candidate_id");
 			int job_id = Integer.parseInt(request.getParameter("job_id"));
+			User user = userService.findByUserId(candidate_id);
+			User_Proffesional_Detail userp = userPService.findByUserId(candidate_id);
+			
+			if(user!=null && userp!=null) {
+				if(user.getDob()!=null && !user.getDob().isEmpty() 
+						&& user.getEmailid()!=null && !user.getEmailid().isEmpty()
+						&& user.getExperience()!=null && !user.getExperience().isEmpty() 
+						&& user.getFullname()!=null && !user.getFullname().isEmpty()
+						&& user.getLocation()!=null && !user.getLocation().isEmpty() 
+						&& user.getMobileno()!=null && !user.getMobileno().isEmpty()
+						&& user.getTagline()!=null && !user.getTagline().isEmpty()) {
+					
+				}else {
+					model.addAttribute("error", "Please Complete the profile before applying for this job");
+					return "redirect:profile";
+				}
+				if(userp.getGrad_branch()!=null && !userp.getGrad_branch().isEmpty() 
+						&& userp.getGrad_cpi()!=null && !userp.getGrad_cpi().isEmpty()
+						&& userp.getPg_cpi()!=null && !userp.getPg_cpi().isEmpty() 
+						&& userp.getPhd_subject()!=null && !userp.getPhd_subject().isEmpty()
+						&& userp.getPostgrad_branch()!=null && !userp.getPostgrad_branch().isEmpty() 
+						&& userp.getTenth()!=null && !userp.getTenth().isEmpty()
+						&& userp.getTwelve()!=null && !userp.getTwelve().isEmpty()) {
+					
+				}else {
+					model.addAttribute("error", "Please Complete the profile before applying for this job");
+					return "redirect:proffesional_details";
+				}
+			}
+			
 			Job_Application jobApplication = new Job_Application();
 			jobApplication.setCandidate_id(candidate_id);
 			jobApplication.setJob_id(job_id);
 			Job_Application existingJobApplication = jobsApplicationService.findByJobIDCandidateID(job_id, candidate_id);
-			if(existingJobApplication!=null && existingJobApplication.getCandidate_id()!=candidate_id 
-					&& existingJobApplication.getJob_id()!=job_id) {
-				jobsApplicationService.saveApplication(jobApplication);
+			if(existingJobApplication!=null && existingJobApplication.getCandidate_id()==candidate_id 
+					&& existingJobApplication.getJob_id()==job_id) {
+				
 				return "redirect:view_applied";
 			}else {
-				//model.addAttribute("error", "You have already applied for this job");
+				jobsApplicationService.saveApplication(jobApplication);
 				return "redirect:view_applied";
 			}
 		}
