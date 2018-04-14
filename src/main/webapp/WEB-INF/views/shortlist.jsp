@@ -63,6 +63,7 @@
 									<td>${user.experience}</td>
 									<td>${user.emailid}</td>
 									<td>${user.mobileno}</td>
+									<td>${perfScore[status.index]}</td>
 								</tr>
 							</c:forEach>
 							<tr><td></td></tr>						

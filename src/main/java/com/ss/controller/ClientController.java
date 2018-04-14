@@ -326,28 +326,37 @@ public class ClientController {
 			List<Job_Application> job_Application = jobsApplicationService.findByJobID(job_id);
 			int i =0;
 			List<User> userList = new ArrayList<User>();
-			List<Integer> perfScore = new ArrayList<Integer>();
+			List<Float> perfScore = new ArrayList<Float>();
 			
 			while(!job_Application.isEmpty()) {
 				Job_Application myJob = job_Application.remove(i);
 				User candidate = userService.findByUserId(myJob.getCandidate_id());
+				System.out.println(candidate);
 				
 				User_Proffesional_Detail candidate_p = userPService.findByUserId(myJob.getCandidate_id());
+				float p0=0,p1=0,p2=0,p3=0,p4=0,p5=0;
 				if(candidate_p!=null) {
-					float p0 = Float.parseFloat(candidate_p.getTenth());
-					float p1 = Float.parseFloat(candidate_p.getTwelve());
-					float p2 = Float.parseFloat(candidate_p.getGrad_cpi());
-					float p3 = Float.parseFloat(candidate_p.getPg_cpi());
+					System.out.println(candidate_p);
+					p0 = Float.parseFloat(candidate_p.getTenth());
+					p1 = Float.parseFloat(candidate_p.getTwelve());
+					p2 = Float.parseFloat(candidate_p.getGrad_cpi());
+					p3 = Float.parseFloat(candidate_p.getPg_cpi());
 				}
 				Research r = researchService.findByUserId(myJob.getCandidate_id());
 				if(r!=null) {
-					float p4 = Float.parseFloat(r.getImpact_factor());
-					float p5 = (float)(r.getNo_research());
+					System.out.println(r);
+					p4 = Float.parseFloat(r.getImpact_factor());
+					p5 = (float)(r.getNo_research());
 				}
-				
+				if(candidate_p==null && r==null) {
+					perfScore.add(0.0f);
+				}else {
+					perfScore.add(p0+p1+p2+p3+p4+p5);
+				}
 				userList.add(candidate);
 			}
 			model.addAttribute("userlist", userList);
+			model.addAttribute("perfScore", perfScore);
 			return "shortlist";
 		}
 		else
