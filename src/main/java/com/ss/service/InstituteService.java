@@ -34,8 +34,12 @@ public class InstituteService {
 		return instdao.findByid(id);
 	}
 
-	public List<Institute> findByCategory(String jobcategory) {
-		return instdao.findByCategory(jobcategory);
+	public Institute findByInstituteId(int id) {
+		return instdao.findByInstituteid(id);
+	}
+	
+	public List<Institute> findInactiveInstitute() {
+		return instdao.findInactiveInstitute();
 	}
 	
 	public void updateInstitute(Institute institute) {

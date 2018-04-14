@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ss.dao.JobsDAO;
+import com.ss.entity.Job_Application;
 import com.ss.entity.Jobs;
 
 @Service("jobsService")
@@ -42,7 +43,12 @@ public class JobsService {
 		return dao.findByPostedByID(postedByid);
 	}
 
-	public void updateEmployee(Jobs job) {
-		dao.updateEmployee(job);
+	public void updateJob(Jobs job) {
+		dao.updateJob(job);
 	}
+	
+	public List<Jobs> findInactiveJobs() {
+		return dao.findInactiveJobs();
+	}
+	
 }

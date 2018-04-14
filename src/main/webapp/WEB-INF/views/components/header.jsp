@@ -9,6 +9,9 @@
  			   <c:when test="${sessionScope.SessionValid.equals('true')}">
 					<a href="profile" class="link-style">My Profile</a>
  			   </c:when>
+ 			   <c:when test="${sessionScope.adminSessionValid.equals('true')}">
+					<a href="admin_dashboard" class="link-style">Admin Dashboard</a>
+ 			   </c:when>
 				<c:otherwise>
 					<a href="institute_login" class="link-style">Login as Institute</a> |
 					<a href="login" class="link-style">Login as Candidate</a> | 

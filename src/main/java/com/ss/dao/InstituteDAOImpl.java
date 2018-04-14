@@ -45,10 +45,10 @@ public class InstituteDAOImpl extends AbstractDAO implements InstituteDAO {
 		return institutelist;
 	}
 
-	public void deleteInstituteByid(int id) {
+	public void deleteInstituteByid(int instid) {
 		// TODO Auto-generated method stub
-		Query query = getSession().createSQLQuery("delete from jobs where id = :id");
-		query.setInteger(0, id);
+		Query query = getSession().createSQLQuery("delete from institute where idinstitute = :id");
+		query.setParameter("id", instid);
 		query.executeUpdate();
 	}
 
@@ -59,16 +59,22 @@ public class InstituteDAOImpl extends AbstractDAO implements InstituteDAO {
 		return (Institute) criteria.uniqueResult();
 	}
 
-	public List<Institute> findByCategory(String jobcategory) {
+	public List<Institute> findInactiveInstitute() {
 		// TODO Auto-generated method stub
 		Criteria criteria = getSession().createCriteria(Institute.class);
-		criteria.add(Restrictions.eq("jobcategory", jobcategory));
+		criteria.add(Restrictions.eq("active", "inactive"));
 		return criteria.list();
 	}
 	
 	public void updateInstitute(Institute institute) {
 		// TODO Auto-generated method stub
 		getSession().update(institute);
+	}
+
+	public Institute findByInstituteid(int id) {
+		Criteria criteria = getSession().createCriteria(Institute.class);
+		criteria.add(Restrictions.eq("idinstitute", id));
+		return (Institute) criteria.uniqueResult();
 	}
 
 }

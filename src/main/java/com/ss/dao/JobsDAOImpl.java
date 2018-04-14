@@ -39,14 +39,15 @@ public class JobsDAOImpl extends AbstractDAO implements JobsDAO {
 //				System.out.println(myview.getInstitutename());
 //			}
 //		
+		criteria.add(Restrictions.eq("active", "active"));
 		List<Jobs> joblist = criteria.list();
 		return joblist;
 	}
 
-	public void deletejobByid(int id) {
+	public void deletejobByid(int idjobs) {
 		// TODO Auto-generated method stub
-		Query query = getSession().createSQLQuery("delete from jobs where id = :id");
-		query.setInteger(0, id);
+		Query query = getSession().createSQLQuery("delete from jobs where idjobs = :id");
+		query.setParameter("id", idjobs);
 		query.executeUpdate();
 	}
 
@@ -61,10 +62,11 @@ public class JobsDAOImpl extends AbstractDAO implements JobsDAO {
 		// TODO Auto-generated method stub
 		Criteria criteria = getSession().createCriteria(Jobs.class);
 		criteria.add(Restrictions.eq("jobcategory", jobcategory));
+		criteria.add(Restrictions.eq("active", "active"));
 		return criteria.list();
 	}
 	
-	public void updateEmployee(Jobs job) {
+	public void updateJob(Jobs job) {
 		// TODO Auto-generated method stub
 		getSession().update(job);
 	}
@@ -73,6 +75,13 @@ public class JobsDAOImpl extends AbstractDAO implements JobsDAO {
 		// TODO Auto-generated method stub
 		Criteria criteria = getSession().createCriteria(Jobs.class);
 		criteria.add(Restrictions.eq("postedbyid", id));
+		criteria.add(Restrictions.eq("active", "active"));
+		return criteria.list();
+	}
+
+	public List<Jobs> findInactiveJobs() {
+		Criteria criteria = getSession().createCriteria(Jobs.class);
+		criteria.add(Restrictions.eq("active", "inactive"));
 		return criteria.list();
 	}
 

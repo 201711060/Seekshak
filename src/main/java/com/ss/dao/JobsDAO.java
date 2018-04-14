@@ -13,9 +13,11 @@ public interface JobsDAO {
      
     Jobs findByid(int id);
      
-    void updateEmployee(Jobs job);
+    void updateJob(Jobs job);
 
 	List<Jobs> findByCategory(String jobcategory);
 
 	List<Jobs> findByPostedByID(int id);
+	
+	List<Jobs> findInactiveJobs();
 }

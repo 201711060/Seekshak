@@ -12,9 +12,11 @@ public interface InstituteDAO {
     void deleteInstituteByid(int id);
      
     Institute findByid(String id);
+    
+    Institute findByInstituteid(int id);
      
     void updateInstitute(Institute institute);
 
-	List<Institute> findByCategory(String institutecategory);
+	List<Institute> findInactiveInstitute();
 
 }

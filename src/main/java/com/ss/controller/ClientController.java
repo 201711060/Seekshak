@@ -12,12 +12,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.ss.entity.Admin;
 import com.ss.entity.Institute;
 import com.ss.entity.Job_Application;
 import com.ss.entity.Jobs;
 import com.ss.entity.Research;
 import com.ss.entity.User;
 import com.ss.entity.User_Proffesional_Detail;
+import com.ss.service.AdminService;
 import com.ss.service.InstituteService;
 import com.ss.service.JobsApplicationService;
 import com.ss.service.JobsService;
@@ -31,6 +33,9 @@ public class ClientController {
 	@Autowired
 	JobsService jobsService;
 
+	@Autowired
+	AdminService adminService;
+	
 	@Autowired
 	UserService userService;
 	
@@ -521,6 +526,140 @@ public class ClientController {
 	public String getContact(Model model) {
 		return "contact";
 	}
+	
+	@GetMapping("/admin_login")
+	public String getAdmin_login(HttpServletRequest request, HttpSession httpSession, Model model) {
+			return "admin_login";
+	}
+	
+	@PostMapping("doadminlogin")
+	public String postDoAdminLogin(HttpServletRequest request, HttpSession httpSession, Model model) {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		Admin admin = adminService.findAdmin(username);
+		System.out.println(admin);
+		if(admin!=null && admin.getUsername().equals(username)
+				&& admin.getPassword().equals(password)) {
+			httpSession.setAttribute("adminSessionValid", "true");
+			httpSession.setAttribute("usertype", "admin");
+			return "redirect:admin_dashboard";
+		}else {
+			model.addAttribute("error", "Invalid Username and Password");
+			return "admin_login";
+		}
+	}
+	
+	@GetMapping("/admin_dashboard")
+	public String getAdmin_Dashboard(HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("usertype").equals("admin")
+				&& httpSession.getAttribute("adminSessionValid").equals("true"))
+		return "admin_dashboard";
+		else
+			return "redirect:admin_login";
+	}
+
+	@GetMapping("/approve_institute_admin")
+	public String getApprove_institute_admin(HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("usertype").equals("admin")
+				&& httpSession.getAttribute("adminSessionValid").equals("true")) {
+			List<Institute> instituteList = instituteService.findInactiveInstitute();
+			model.addAttribute("instituteList", instituteList);
+			return "approve_institute_admin";
+		}
+		else
+			return "redirect:admin_login";
+	}
+
+	@PostMapping("/doapproveinstitute")
+	public String postApprove_institute_admin(HttpServletRequest request, HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("usertype").equals("admin")
+				&& httpSession.getAttribute("adminSessionValid").equals("true")) {
+			int instituteid = 0;
+			if(!request.getParameter("idinstitute").isEmpty())
+				instituteid = Integer.parseInt(request.getParameter("idinstitute"));
+			Institute institute = instituteService.findByInstituteId(instituteid);
+			if(institute!=null) {
+				institute.setActive("active");
+				instituteService.updateInstitute(institute);
+			}
+			return "redirect:approve_institute_admin";
+			
+		}
+		else
+			return "redirect:admin_login";
+	}
+	
+	@PostMapping("/dorejectinstitute")
+	public String postReject_institute_admin(HttpServletRequest request, HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("usertype").equals("admin")
+				&& httpSession.getAttribute("adminSessionValid").equals("true")) {
+			int instituteid = 0;
+			if(!request.getParameter("idinstitute").isEmpty())
+				instituteid = Integer.parseInt(request.getParameter("idinstitute"));
+			Institute institute = instituteService.findByInstituteId(instituteid);
+			if(institute!=null) {
+				instituteService.deleteInstituteById(instituteid);
+			}
+			return "redirect:approve_institute_admin";
+			
+		}
+		else
+			return "redirect:admin_login";
+	}
+	
+	@GetMapping("/approve_job_admin")
+	public String getApprove_job_admin(HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("usertype").equals("admin")
+				&& httpSession.getAttribute("adminSessionValid").equals("true")) {
+			List<Jobs> jobList = jobsService.findInactiveJobs();
+			if(jobList!=null) {
+				model.addAttribute("jobList", jobList);
+			}
+			return "approve_job_admin";
+		}
+		else
+			return "redirect:admin_login";
+	}
+	
+	@PostMapping("/doapprovejob")
+	public String postApprove_job_admin(HttpServletRequest request, HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("usertype").equals("admin")
+				&& httpSession.getAttribute("adminSessionValid").equals("true")) {
+			int jobid = 0;
+			if(!request.getParameter("idjob").isEmpty())
+				jobid = Integer.parseInt(request.getParameter("idjob"));
+			Jobs job = jobsService.findById(jobid);
+			if(job!=null) {
+				job.setActive("active");
+				jobsService.updateJob(job);
+			}
+			return "redirect:approve_job_admin";
+			
+		}
+		else
+			return "redirect:admin_login";
+	}
+	
+	@PostMapping("/dorejectjob")
+	public String postReject_job_admin(HttpServletRequest request, HttpSession httpSession, Model model) {
+		if(httpSession.getAttribute("usertype").equals("admin")
+				&& httpSession.getAttribute("adminSessionValid").equals("true")) {
+			int jobid = 0;
+			if(!request.getParameter("idjob").isEmpty())
+				jobid = Integer.parseInt(request.getParameter("idjob"));
+			Jobs job = jobsService.findById(jobid);
+			if(job!=null&& job.getIdjobs()==jobid) {
+				job.setActive("active");
+				jobsService.deleteJobById(jobid);
+			}
+			return "redirect:approve_job_admin";
+			
+		}
+		else
+			return "redirect:admin_login";
+
+	}
+	
 	
 	@GetMapping("/")
 	public String getHome(Model model) {
