@@ -59,6 +59,8 @@
 												<c:out value="${job.jobtitle}" />
 												-
 												<c:out value="${job.postedby}" />
+												-
+												<c:out value="${job.active}" />
 												<p style="float: right; margin: 1%">
 													LastDate:
 													<c:out value="${job.lastdate}" />
@@ -67,7 +69,6 @@
 											<div class="panel-title"></div>
 											<div class="panel-body">
 												<c:out value="${job.jobdescription}" />
-												<c:out value="${job.active}" />
 											</div>
 										</div>
 							</c:forEach>
