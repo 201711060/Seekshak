@@ -200,7 +200,7 @@ public class ClientController {
 			return "redirect:register_user";
 		}else{
 			userService.saveUser(newUser);
-			return "redirect:index";	
+			return "redirect:login";	
 		}
 		
 	}
@@ -239,8 +239,10 @@ public class ClientController {
 		institute.setEmail(email);
 		institute.setPassword(pwd);
 		Institute existingInstitute = instituteService.findById(email);
-		if(existingInstitute!=null && !existingInstitute.getEmail().equals(email))
+		if(existingInstitute!=null && !existingInstitute.getEmail().equals(email)) {
 			instituteService.saveInstitute(institute);
+			return "redirect:institute_login";
+		}
 		return "redirect:index";
 	}
 
