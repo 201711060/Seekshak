@@ -240,10 +240,11 @@ public class ClientController {
 		institute.setPassword(pwd);
 		Institute existingInstitute = instituteService.findById(email);
 		if(existingInstitute!=null && !existingInstitute.getEmail().equals(email)) {
+			return "redirect:institute_login";
+		}else {
 			instituteService.saveInstitute(institute);
 			return "redirect:institute_login";
 		}
-		return "redirect:index";
 	}
 
 	@GetMapping("/user")
