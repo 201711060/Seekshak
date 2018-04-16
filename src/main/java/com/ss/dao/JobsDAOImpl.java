@@ -79,6 +79,13 @@ public class JobsDAOImpl extends AbstractDAO implements JobsDAO {
 		return criteria.list();
 	}
 
+	public List<Jobs> findAllByPostedByID(int id) {
+		// TODO Auto-generated method stub
+		Criteria criteria = getSession().createCriteria(Jobs.class);
+		criteria.add(Restrictions.eq("postedbyid", id));
+		return criteria.list();
+	}
+
 	public List<Jobs> findInactiveJobs() {
 		Criteria criteria = getSession().createCriteria(Jobs.class);
 		criteria.add(Restrictions.eq("active", "inactive"));

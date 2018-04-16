@@ -168,8 +168,10 @@ public class ClientController {
 		if(httpSession.getAttribute("instituteSessionValid").equals("true")) {
 			Institute institute = instituteService.findByInstituteId(postedbyid);
 			if(institute!=null && institute.getActive()!=null
-					&& institute.getActive().equals("active"))
+					&& institute.getActive().equals("active")) {
 				jobsService.saveJob(newjob);
+				return "redirect:viewpostedjobs";
+			}
 			else {
 				model.addAttribute("error", "Your account is not Verified yet");
 				return "post_job";
@@ -376,7 +378,7 @@ public class ClientController {
 		if(httpSession.getAttribute("instituteSessionValid") != null 
 				&& httpSession.getAttribute("instituteSessionValid").equals("true")) {
 			int postedByid = (Integer)httpSession.getAttribute("instituteid");
-			List<Jobs> myJobs = jobsService.findByPostedByID(postedByid);
+			List<Jobs> myJobs = jobsService.findAllByPostedByID(postedByid);
 			model.addAttribute("joblist", myJobs);
 			return "viewpostedjobs";
 		}

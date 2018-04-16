@@ -19,5 +19,7 @@ public interface JobsDAO {
 
 	List<Jobs> findByPostedByID(int id);
 	
+	List<Jobs> findAllByPostedByID(int id);
+	
 	List<Jobs> findInactiveJobs();
 }

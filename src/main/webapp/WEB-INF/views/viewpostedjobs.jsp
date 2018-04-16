@@ -67,6 +67,7 @@
 											<div class="panel-title"></div>
 											<div class="panel-body">
 												<c:out value="${job.jobdescription}" />
+												<c:out value="${job.active}" />
 											</div>
 										</div>
 							</c:forEach>
