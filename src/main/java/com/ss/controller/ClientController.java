@@ -170,8 +170,10 @@ public class ClientController {
 			if(institute!=null && institute.getActive()!=null
 					&& institute.getActive().equals("active"))
 				jobsService.saveJob(newjob);
-			else
+			else {
 				model.addAttribute("error", "Your account is not Verified yet");
+				return "post_job";
+			}
 		}
 		return "redirect:index";
 	}
