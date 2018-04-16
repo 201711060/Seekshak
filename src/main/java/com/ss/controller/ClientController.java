@@ -164,6 +164,7 @@ public class ClientController {
 		newjob.setJobcategory(jobcategory);
 		newjob.setPostedby(postedby);
 		newjob.setPostedbyid(postedbyid);
+		newjob.setActive("inactive");
 		
 		if(httpSession.getAttribute("instituteSessionValid").equals("true")) {
 			Institute institute = instituteService.findByInstituteId(postedbyid);
