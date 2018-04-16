@@ -167,7 +167,8 @@ public class ClientController {
 		
 		if(httpSession.getAttribute("instituteSessionValid").equals("true")) {
 			Institute institute = instituteService.findByInstituteId(postedbyid);
-			if(institute!=null && institute.getActive().equals("active"))
+			if(institute!=null && institute.getActive()!=null
+					&& institute.getActive().equals("active"))
 				jobsService.saveJob(newjob);
 			else
 				model.addAttribute("error", "Your account is not Verified yet");
@@ -238,6 +239,8 @@ public class ClientController {
 		institute.setContactno(contactno);
 		institute.setEmail(email);
 		institute.setPassword(pwd);
+		institute.setActive("inactive");
+		
 		Institute existingInstitute = instituteService.findById(email);
 		if(existingInstitute!=null && !existingInstitute.getEmail().equals(email)) {
 			return "redirect:institute_login";
