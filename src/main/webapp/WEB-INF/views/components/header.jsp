@@ -39,7 +39,7 @@
 		</div>
 		<div style="clear:right;float:right">
 			<h2>Welcome ${sessionScope.institutename} ${sessionScope.fullname}
-		to Seekshuk Job Portal
+		to Seekshak Job Portal
 			</h2>
 		</div>
 		
